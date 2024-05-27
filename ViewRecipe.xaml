@@ -1,11 +1,11 @@
-﻿<Window x:Class="PROG6221_FINAL.MainWindow"
+﻿<Window x:Class="PROG6221_FINAL.ViewRecipe"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG6221_FINAL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1020" Width="1920"
+        Title="ViewRecipe" Height="1020" Width="1920"
         Left="0" Top="0">
     <Window.Resources>
         <!-- Define a style for the border corner radius -->
