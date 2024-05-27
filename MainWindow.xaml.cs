@@ -52,7 +52,9 @@ namespace PROG6221_FINAL
 
         private void btn_food_group_Click(object sender, RoutedEventArgs e)
         {
-            
+            FoodGroupPieChart obj = new FoodGroupPieChart();
+            this.Visibility = Visibility.Hidden;
+            obj.Show();
         }
     }
 }
