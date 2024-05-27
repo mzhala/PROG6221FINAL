@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace PROG6221_FINAL
 {
     /// <summary>
-    /// Interaction logic for ViewRecipe.xaml
+    /// Interaction logic for RemoveRecipe.xaml
     /// </summary>
-    public partial class ViewRecipe : Window
+    public partial class RemoveRecipe : Window
     {
-        public ViewRecipe()
+        public RemoveRecipe()
         {
             InitializeComponent();
         }
@@ -33,7 +33,9 @@ namespace PROG6221_FINAL
 
         private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
         {
-
+            ViewRecipe obj = new ViewRecipe();
+            this.Visibility = Visibility.Hidden;
+            obj.Show();
         }
 
         private void btn_add_recipe_Click(object sender, RoutedEventArgs e)
@@ -48,9 +50,7 @@ namespace PROG6221_FINAL
 
         private void btn_remove_recipe_Click(object sender, RoutedEventArgs e)
         {
-            RemoveRecipe obj = new RemoveRecipe();
-            this.Visibility = Visibility.Hidden;
-            obj.Show();
+
         }
 
         private void btn_food_group_Click(object sender, RoutedEventArgs e)
@@ -70,36 +70,11 @@ namespace PROG6221_FINAL
             await Task.Delay(100); // Delay for 1000 milliseconds (1 second)
         }
 
-        private void btn_recipeScale_reset_Click(object sender, RoutedEventArgs e)
+        private async void btn_removeSelected_Recipe_Click(object sender, RoutedEventArgs e)
         {
-            btn_recipeScale_reset.Background = Brushes.SeaGreen;
-            btn_recipeScale_half.Background = Brushes.White;
-            btn_recipeScale_double.Background = Brushes.White;
-            btn_recipeScale_triple.Background = Brushes.White;
-        }
-
-        private void btn_recipeScale_half_Click(object sender, RoutedEventArgs e)
-        {
-            btn_recipeScale_reset.Background = Brushes.White;
-            btn_recipeScale_half.Background = Brushes.SeaGreen;
-            btn_recipeScale_double.Background = Brushes.White;
-            btn_recipeScale_triple.Background = Brushes.White;
-        }
-
-        private void btn_recipeScale_double_Click(object sender, RoutedEventArgs e)
-        {
-            btn_recipeScale_reset.Background = Brushes.White;
-            btn_recipeScale_half.Background = Brushes.White;
-            btn_recipeScale_double.Background = Brushes.SeaGreen;
-            btn_recipeScale_triple.Background = Brushes.White;
-        }
-
-        private void btn_recipeScale_triple_Click(object sender, RoutedEventArgs e)
-        {
-            btn_recipeScale_reset.Background = Brushes.White;
-            btn_recipeScale_half.Background = Brushes.White;
-            btn_recipeScale_double.Background = Brushes.White;
-            btn_recipeScale_triple.Background = Brushes.SeaGreen;
+            btn_removeSelected_Recipe.Background = Brushes.Green;
+            await Delayed1SecMethod(); // Delay for 1000 milliseconds (1 second)
+            btn_removeSelected_Recipe.Background = Brushes.Transparent;
         }
     }
 }

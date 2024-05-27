@@ -1,11 +1,11 @@
-﻿<Window x:Class="PROG6221_FINAL.ViewRecipe"
+﻿<Window x:Class="PROG6221_FINAL.RemoveRecipe"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG6221_FINAL"
         mc:Ignorable="d"
-        Title="ViewRecipe" Height="1020" Width="1920"
+        Title="RemoveRecipe" Height="1020" Width="1920"
         Left="0" Top="0">
     <Window.Resources>
         <!-- Define a style for the border corner radius -->
@@ -80,7 +80,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <!-- Define a style for the hover effect - None -->
         <Style x:Key="HoverEffectStyleNone" TargetType="Button" BasedOn="{StaticResource CornerRadiusStyle}">
             <Style.Triggers>
@@ -89,7 +89,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <Grid Width="1920" Height="1004" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1219*"/>
@@ -105,10 +105,10 @@
             <Label Content="DishMe" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Margin="50,0,651,0" Foreground="Green" UseLayoutRounding="False" Height="63" VerticalAlignment="Center"/>
             <Label Content="." HorizontalAlignment="Left" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Width="17" Height="64" VerticalAlignment="Center" Margin="214,0,0,0"/>
             <Button x:Name="btn_home" Style="{StaticResource HoverEffectStyleNone}" Content="Home" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="550,42,0,0" Click="btn_home_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10"/>
-            <Button x:Name="btn_view_recipes" Style="{StaticResource HoverEffectStyle}"  Content="View Recipes" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="750,42,0,0" Grid.ColumnSpan="2" Click="btn_view_recipes_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Foreground="Green" FontWeight="Bold"/>
+            <Button x:Name="btn_view_recipes" Style="{StaticResource HoverEffectStyle}"  Content="View Recipes" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="750,42,0,0" Grid.ColumnSpan="2" Click="btn_view_recipes_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10"/>
             <Button x:Name="btn_add_recipe" Style="{StaticResource HoverEffectStyle}" Content="Add Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="-60,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_add_recipe_Click"/>
             <Button x:Name="btn_update_recipe" Style="{StaticResource HoverEffectStyle}" Content="Update Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="140,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_update_recipe_Click"/>
-            <Button x:Name="btn_remove_recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="365,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_remove_recipe_Click"/>
+            <Button x:Name="btn_remove_recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="365,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_remove_recipe_Click" Foreground="Green" FontWeight="Bold"/>
             <Button x:Name="btn_food_group" Style="{StaticResource HoverEffectStyle}" Content="Food Group Chart" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="602,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Padding="1,1,1,10" Click="btn_food_group_Click"/>
         </Grid>
         <Label Content="© 2024 Halalisile Mzobe" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="1920" Height="34" HorizontalContentAlignment="Center" Background="SeaGreen" FontSize="16" Margin="0,970,0,0" Padding="5,0,5,0"/>
@@ -118,18 +118,14 @@
                     <ColumnDefinition Width="377*"/>
                     <ColumnDefinition Width="16*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btn_viewSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="View Recipe" HorizontalAlignment="Left" Margin="14,720,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Grid.ColumnSpan="2" Click="btn_viewSelected_Recipe_Click"/>
-                <Label Content="Scale" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" FontSize="24" Height="43" Margin="10,10,0,0"/>
-                <ListBox x:Name="lst_recipeList" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,67,14,80" FontSize="24" Background="{x:Null}" Grid.ColumnSpan="2">
+                <ListBox x:Name="lst_recipeList" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,6,14,216" FontSize="24" Background="{x:Null}" Grid.ColumnSpan="2">
                     <ListBoxItem Content="Recipe 1"/>
                     <ListBoxItem Content="Recipe 2"/>
                     <ListBoxItem Content="Recipe 3"/>
                     <ListBoxItem Content="Recipe 4"/>
                 </ListBox>
-                <Button x:Name="btn_recipeScale_half" Style="{StaticResource HoverEffectStyle}" Content="1/2x" HorizontalAlignment="Left" Margin="157,6,0,0" VerticalAlignment="Top" Width="60" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_half_Click" Background="White" FontSize="24"/>
-                <Button x:Name="btn_recipeScale_double" Style="{StaticResource HoverEffectStyle}" Content="2x" HorizontalAlignment="Left" Margin="237,6,0,0" VerticalAlignment="Top" Width="60" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_double_Click" Background="White" FontSize="24"/>
-                <Button x:Name="btn_recipeScale_triple" Style="{StaticResource HoverEffectStyle}" Content="3x" HorizontalAlignment="Left" Margin="317,6,0,0" VerticalAlignment="Top" Width="61" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_triple_Click" Background="White" FontSize="24" Grid.ColumnSpan="2"/>
-                <Button x:Name="btn_recipeScale_reset" Style="{StaticResource HoverEffectStyle}" Content="1x" HorizontalAlignment="Left" Margin="77,6,0,0" VerticalAlignment="Top" Width="60" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_reset_Click" Background="SeaGreen" FontSize="24"/>
+                <Button x:Name="btn_removeSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" Margin="14,655,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Grid.ColumnSpan="2" Click="btn_removeSelected_Recipe_Click"/>
+                <Button x:Name="btn_viewSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="View Recipe" HorizontalAlignment="Left" Margin="14,589,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Grid.ColumnSpan="2" Click="btn_viewSelected_Recipe_Click"/>
             </Grid>
         </Border>
         <Border Style="{StaticResource CornerRadiusStyleGridBorder}" Margin="475,160,0,60" HorizontalAlignment="Left" Width="1399" Grid.ColumnSpan="4">
