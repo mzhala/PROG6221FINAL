@@ -20,5 +20,35 @@ namespace PROG6221_FINAL
         {
             InitializeComponent();
         }
+
+        private void btn_home_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
+        {
+            int i = 1;
+        }
+
+        private void btn_add_recipe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_update_recipe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_remove_recipe_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_food_group_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

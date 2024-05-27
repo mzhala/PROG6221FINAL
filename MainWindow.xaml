@@ -5,8 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG6221_FINAL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Left="0" Top="0"
+        Title="MainWindow" Height="1020" Width="1920">
+    <Window.Resources>
+        <!-- Define a style for the border corner radius -->
+        <Style x:Key="CornerRadiusStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                             Background="{TemplateBinding Background}" 
+                             BorderBrush="{TemplateBinding BorderBrush}" 
+                             BorderThickness="{TemplateBinding BorderThickness}" 
+                             CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Define a style for the hover effect -->
+        <Style x:Key="HoverEffectStyle" TargetType="Button" BasedOn="{StaticResource CornerRadiusStyle}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+
+                    <Setter Property="Foreground" Value="#CEBA56"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Define a style for the hover effect - None -->
+        <Style x:Key="HoverEffectStyleNone" TargetType="Button" BasedOn="{StaticResource CornerRadiusStyle}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Width="1920" Height="1004" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFF2F2F2"/>
+                <GradientStop Color="#9035985D" Offset="1"/>
+                <GradientStop Color="#A5CBE8D6" Offset="0.55"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1219*"/>
+            <ColumnDefinition Width="201*"/>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="300*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid HorizontalAlignment="Left" Width="1920" Height="84" VerticalAlignment="Top" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1019*"/>
+                <ColumnDefinition Width="901*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="DishMe" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Margin="50,0,651,0" Foreground="Green" UseLayoutRounding="False" Height="63" VerticalAlignment="Center"/>
+            <Label Content="." HorizontalAlignment="Left" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Width="17" Height="64" VerticalAlignment="Center" Margin="214,0,0,0"/>
+            <Button x:Name="btn_home" Style="{StaticResource HoverEffectStyleNone}" Content="Home" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="550,42,0,0" Click="btn_home_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Foreground="Green" FontWeight="Bold"/>
+            <Button x:Name="btn_view_recipes" Style="{StaticResource HoverEffectStyle}"  Content="View Recipes" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="750,42,0,0" Grid.ColumnSpan="2" Click="btn_view_recipes_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10"/>
+            <Button x:Name="btn_add_recipe" Style="{StaticResource HoverEffectStyle}" Content="Add Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="-60,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_add_recipe_Click"/>
+            <Button x:Name="btn_update_recipe" Style="{StaticResource HoverEffectStyle}" Content="Update Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="140,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_update_recipe_Click"/>
+            <Button x:Name="btn_remove_recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="365,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_remove_recipe_Click"/>
+            <Button x:Name="btn_food_group" Style="{StaticResource HoverEffectStyle}" Content="Food Group Chart" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="602,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Padding="1,1,1,10" Click="btn_food_group_Click"/>
+        </Grid>
+        <Label Content="© 2024 Halalisile Mzobe" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="1920" Height="34" HorizontalContentAlignment="Center" Background="{x:Null}" FontSize="16" Margin="0,970,0,0" Padding="5,0,5,0"/>
+        <Label Content="Soup Savvy:" HorizontalAlignment="Left" Margin="0,275,0,0" VerticalAlignment="Top" Height="227" Width="1920" Grid.ColumnSpan="4" FontFamily="Microsoft Sans Serif" FontSize="140" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+        <Label Content="Simple, Satisfying Recipes!" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="202" Width="1920" Grid.ColumnSpan="4" FontFamily="Yu Gothic Light" FontSize="140" Margin="0,0,0,331" Padding="5,0,5,0" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>
