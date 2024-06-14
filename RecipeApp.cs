@@ -232,6 +232,11 @@ namespace PROG6221_FINAL
         {
             return ratio;
         }
+
+        public String getFoodGroup(int index)
+        {
+            return foodGroups.GetFoodGroupName(index);
+        }
         // Method to calculate the sum of calories from a list of ingredients
         public int CalculateTotalCalories(List<Ingredient> ingredients, CalorieExceededHandler calorieExceededHandler)
         {

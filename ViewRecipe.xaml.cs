@@ -42,25 +42,30 @@ namespace PROG6221_FINAL
             {
                 // Calculate scaled ingredients
                 var scaledIngredients = selectedRecipe.Ingredients
-                    .Select(ing => new Ingredient(ing.Name, ing.Quantity * recipeApp.getRatio(), ing.Unit, ing.CalorieCount, ing.FoodGroupIndex))
+                    .Select(ing => new Ingredient(
+                        ing.Name,
+                        ing.Quantity * recipeApp.getRatio(),
+                        ing.Unit,
+                        ing.CalorieCount,
+                        ing.FoodGroupIndex))
                     .ToList();
 
-                // Display scaled ingredients
+                // Display scaled ingredients with numbering, calorie count, and food group
                 lst_ingredients.ItemsSource = scaledIngredients
-                    .Select(ing => $"{ing.Quantity} {ing.Unit} {ing.Name}");
+                    .Select((ing, index) => $"{index + 1}. {ing.Quantity} {ing.Unit} {ing.Name} (Calories: {ing.CalorieCount}, Food Group: {recipeApp.getFoodGroup(ing.FoodGroupIndex)})");
+
+                // Display steps with numbering
+                lst_steps.ItemsSource = selectedRecipe.Steps
+                    .Select((step, index) => $"{index + 1}. {step.Instruction}");
 
                 // Calculate total calories with scaled ingredients
                 double totalCalories = recipeApp.CalculateTotalCalories(scaledIngredients, recipeApp.HandleCalorieExceeded);
 
                 // Display recipe details
-                lst_steps.ItemsSource = selectedRecipe.Steps.Select(step => step.Instruction);
                 lbl_selectedRecipe.Content = selectedRecipe.Name;
                 lbl_calories.Content = $"Calories: {totalCalories}";
             }
         }
-
-
-
 
         private void btn_viewSelected_Recipe_Click(object sender, RoutedEventArgs e)
         {
