@@ -1,113 +1,106 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LiveCharts;
-using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 
 namespace PROG6221_FINAL
 {
-    /// <summary>
-    /// Interaction logic for FoodGroupPieChart.xaml
-    /// </summary>
     public partial class FoodGroupPieChart : Window
     {
+        private RecipeApp recipeApp;
+        private int totalIngredients; // Declare totalIngredients at class level
+
         public FoodGroupPieChart()
         {
             InitializeComponent();
-
-            // Define series collection
-            SeriesCollection seriesCollection = new SeriesCollection
-            {
-                new PieSeries
-                {
-                    Title = "Group 1",
-                    Values = new ChartValues<double> { 10 },
-                    DataLabels = true,
-                    LabelPoint = PieLabelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Group 2",
-                    Values = new ChartValues<double> { 15 },
-                    DataLabels = true,
-                    LabelPoint = PieLabelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Group 3",
-                    Values = new ChartValues<double> { 20 },
-                    DataLabels = true,
-                    LabelPoint = PieLabelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Group 4",
-                    Values = new ChartValues<double> { 5 },
-                    DataLabels = true,
-                    LabelPoint = PieLabelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Group 4",
-                    Values = new ChartValues<double> { 5 },
-                    DataLabels = true,
-                    LabelPoint = PieLabelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Group 6",
-                    Values = new ChartValues<double> { 5 },
-                    DataLabels = true,
-                    LabelPoint = PieLabelPoint
-                },
-                new PieSeries
-                {
-                    Title = "Group 7",
-                    Values = new ChartValues<double> { 5 },
-                    DataLabels = true,
-                    LabelPoint = PieLabelPoint
-                }
-            };
-
-
-            // Assign the series collection to the PieChart
-            pieChart.Series = seriesCollection;
+            recipeApp = new RecipeApp(); // Instantiate RecipeApp
+            LoadFoodGroupDistribution();
+            DisplaySortedRecipeNames();
         }
 
-        // Custom label formatting function
-        private Func<ChartPoint, string> PieLabelPoint => chartPoint =>
+        private void LoadFoodGroupDistribution()
         {
-            // Get the value of the data point
-            double value = chartPoint.Y;
+            // Get all recipes
+            List<Recipe> recipes = recipeApp.GetAllRecipes();
 
-            // Get the title of the series
-            string title = chartPoint.SeriesView.Title;
+            // Calculate food group distribution
+            var foodGroupCounts = new Dictionary<string, int>();
+            totalIngredients = 0; // Initialize totalIngredients here
 
-            // Format the label to include both title and value
-            return $"{title}: {value}";
-        };
+            foreach (var recipe in recipes)
+            {
+                foreach (var ingredient in recipe.Ingredients)
+                {
+                    string foodGroup = recipeApp.getFoodGroup(ingredient.FoodGroupIndex);
+
+                    if (foodGroupCounts.ContainsKey(foodGroup))
+                        foodGroupCounts[foodGroup]++;
+                    else
+                        foodGroupCounts.Add(foodGroup, 1);
+
+                    totalIngredients++;
+                }
+            }
+
+            // Prepare data for pie chart
+            SeriesCollection series = new SeriesCollection();
+            foreach (var kv in foodGroupCounts)
+            {
+                double percentage = (double)kv.Value / totalIngredients * 100;
+                series.Add(new PieSeries
+                {
+                    Title = kv.Key,
+                    Values = new ChartValues<int> { kv.Value },
+
+                    DataLabels = true, // Display data labels
+                    LabelPoint = point => $"{point.Participation:P}", // Customize label to show percentage
+                    FontWeight = FontWeights.Bold, // Bold font for labels
+                    FontSize = 14, // Adjust font size as needed
+
+                    Foreground = Brushes.Black, // Set text color to black
+
+                });
+            }
+
+            // Set the Series of the pie chart
+            pieChart.LegendLocation = LegendLocation.Right;
+
+            pieChart.Series = series;
+
+        }
 
 
 
-        private void btn_updateSelected_Recipe_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+
+
+        private void DisplaySortedRecipeNames()
         {
+            // Get all recipes
+            List<Recipe> recipes = recipeApp.GetAllRecipes();
 
+            // Sort recipes by name
+            var sortedRecipes = recipes.OrderBy(r => r.Name).ToList();
+
+            // Bind sorted recipes to the ListBox
+            lst_allRecipeList.ItemsSource = sortedRecipes;
+            lst_allRecipeList.DisplayMemberPath = "Name";
         }
 
         private void btn_home_Click(object sender, RoutedEventArgs e)
         {
             MainWindow obj = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            obj.Show();
+        }
+
+        private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
+        {
+            ViewRecipe obj = new ViewRecipe();
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
@@ -135,19 +128,7 @@ namespace PROG6221_FINAL
 
         private void btn_food_group_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
-        {
-            ViewRecipe obj = new ViewRecipe();
-            this.Visibility = Visibility.Hidden;
-            obj.Show();
-        }
-
-        private void btn_updateSelected_Recipe__Click(object sender, RoutedEventArgs e)
-        {
-
+            // Already on the Food Group Chart page
         }
     }
 }

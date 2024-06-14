@@ -156,7 +156,9 @@ namespace PROG6221_FINAL
 
         private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
         {
-            // Refresh the recipes list or switch to another view
+            ViewRecipe obj = new ViewRecipe();
+            this.Visibility = Visibility.Hidden;
+            obj.Show();
         }
 
         private void btn_removeSelected_Recipe_Confirm_Click(object sender, RoutedEventArgs e)

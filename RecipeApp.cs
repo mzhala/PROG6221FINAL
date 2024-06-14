@@ -351,5 +351,11 @@ namespace PROG6221_FINAL
                 recipes.Remove(recipe);
             }
         }
+
+        // Method to get all recipes
+        public List<Recipe> GetAllRecipes()
+        {
+            return recipes;
+        }
     }
 }

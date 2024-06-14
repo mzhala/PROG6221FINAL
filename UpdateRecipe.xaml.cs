@@ -70,7 +70,9 @@ namespace PROG6221_FINAL
 
         private void btn_viewRecipe_Click(object sender, RoutedEventArgs e)
         {
-
+            ViewRecipe obj = new ViewRecipe();
+            this.Visibility = Visibility.Hidden;
+            obj.Show();
         }
     }
 }
