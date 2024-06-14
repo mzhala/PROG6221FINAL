@@ -15,10 +15,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border"
-                             Background="{TemplateBinding Background}" 
-                             BorderBrush="{TemplateBinding BorderBrush}" 
-                             BorderThickness="{TemplateBinding BorderThickness}" 
-                             CornerRadius="5">
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -32,10 +32,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border x:Name="border"
-                             Background="{TemplateBinding Background}" 
-                             BorderBrush="{TemplateBinding BorderBrush}" 
-                             BorderThickness="{TemplateBinding BorderThickness}" 
-                             CornerRadius="5">
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="5">
                             <ScrollViewer x:Name="PART_ContentHost" />
                         </Border>
                     </ControlTemplate>
@@ -49,10 +49,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBox">
                         <Border x:Name="border"
-                             Background="{TemplateBinding Background}" 
-                             BorderBrush="{TemplateBinding BorderBrush}" 
-                             BorderThickness="{TemplateBinding BorderThickness}" 
-                             CornerRadius="5">
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="5">
                             <ScrollViewer Margin="0" Focusable="False">
                                 <ItemsPresenter/>
                             </ScrollViewer>
@@ -89,6 +89,7 @@
         </Style>
     </Window.Resources>
 
+
     <Grid Width="1920" Height="1004" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="71*"/>
@@ -96,6 +97,7 @@
             <ColumnDefinition Width="15*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Header and Navigation Buttons -->
         <Grid HorizontalAlignment="Left" Width="1920" Height="84" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Background="#FFA6D1D5" Margin="0,0,0,920">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1019*"/>
@@ -104,35 +106,34 @@
             <Label Content="DishMe" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Margin="50,15,651,0" Foreground="#FF065A63" UseLayoutRounding="False" Height="64" VerticalAlignment="Center"/>
             <Label Content="." HorizontalAlignment="Left" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Width="17" Height="64" VerticalAlignment="Center" Margin="214,15,0,0"/>
             <Button x:Name="btn_home" Style="{StaticResource HoverEffectStyle}" Content="Home" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="550,42,0,0" Click="btn_home_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10"/>
-            <Button x:Name="btn_view_recipes" Style="{StaticResource HoverEffectStyle}"  Content="View Recipes" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="750,42,0,0" Grid.ColumnSpan="2" Click="btn_view_recipes_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10"/>
+            <Button x:Name="btn_view_recipes" Style="{StaticResource HoverEffectStyle}" Content="View Recipes" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="750,42,0,0" Grid.ColumnSpan="2" Click="btn_view_recipes_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10"/>
             <Button x:Name="btn_add_recipe" Style="{StaticResource HoverEffectStyle}" Content="Add Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="-60,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_add_recipe_Click"/>
             <Button x:Name="btn_update_recipe" Style="{StaticResource HoverEffectStyle}" Content="Update Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="140,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_update_recipe_Click"/>
             <Button x:Name="btn_remove_recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="365,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_remove_recipe_Click"/>
             <Button x:Name="btn_food_group" Style="{StaticResource HoverEffectStyleNone}" Content="Food Group Chart" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="602,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Padding="1,1,1,10" Click="btn_food_group_Click" Foreground="#FF065A63" FontWeight="Bold"/>
         </Grid>
+
+        <!-- Footer -->
         <Label Content="© 2024 Halalisile Mzobe" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="1920" Height="34" HorizontalContentAlignment="Center" Background="#FFA6D1D5" FontSize="16" Margin="0,970,0,0" Padding="5,0,5,0"/>
-        <!-- Border for recipe list view -->
+
+        <!-- Recipe List -->
         <Border Style="{StaticResource CornerRadiusStyleGridBorder}" Margin="50,160,1415,60" HorizontalAlignment="Left" Width="390" Grid.ColumnSpan="4">
             <Grid x:Name="list_view">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="377*"/>
                     <ColumnDefinition Width="16*"/>
                 </Grid.ColumnDefinitions>
-                <!-- ListBox for selected recipe list -->
-                <ListBox x:Name="lst_selectedRecipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,53,14,499" FontSize="24" Background="White">
-                    <!-- Sample Items - these will be populated dynamically -->
-                </ListBox>
-                <!-- ListBox for recipe list -->
-                <ListBox x:Name="lst_allRecipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,423,14,87" FontSize="24" Background="White">
-                    <!-- Sample Items - these will be populated dynamically -->
-                </ListBox>
-                <Button x:Name="btn_selectRecipe" Style="{StaticResource HoverEffectStyle}" Content="Add Recipe to Pie Graph" HorizontalAlignment="Center" Margin="0,720,0,0" VerticalAlignment="Top" Width="348" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24"/>
+                <ListBox x:Name="lst_selectedRecipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,53,14,499" FontSize="24" Background="White"/>
+                <ListBox x:Name="lst_allRecipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,423,14,87" FontSize="24" Background="White"/>
+                <Button x:Name="btn_addRecipeToPieChart" Style="{StaticResource HoverEffectStyle}" Content="Add Recipe to Pie Graph" HorizontalAlignment="Center" Margin="0,720,0,0" VerticalAlignment="Top" Width="348" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_addRecipeToPieChart_Click"/>
                 <Label Content="Selected Recipes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="366" FontSize="24" Height="43" Margin="10,10,0,0" FontWeight="Bold"/>
                 <Label Content="Recipe List" HorizontalAlignment="Left" VerticalAlignment="Top" Width="366" FontSize="24" Height="43" Margin="10,380,0,0" FontWeight="Bold"/>
-                <Button x:Name="btn_removeSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" Margin="14,294,0,0" VerticalAlignment="Top" Width="214" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24"/>
-                <Button x:Name="btn_clearRecipeList" Style="{StaticResource HoverEffectStyle}" Content="Clear" HorizontalAlignment="Left" Margin="247,294,0,0" VerticalAlignment="Top" Width="115" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24"/>
+                <Button x:Name="btn_removeSelectedRecipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" Margin="14,294,0,0" VerticalAlignment="Top" Width="214" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_removeSelectedRecipe_Click"/>
+                <Button x:Name="btn_clearRecipeList" Style="{StaticResource HoverEffectStyle}" Content="Clear" HorizontalAlignment="Left" Margin="247,294,0,0" VerticalAlignment="Top" Width="115" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_clearRecipeList_Click"/>
             </Grid>
         </Border>
+
+        <!-- Pie Chart -->
         <Border Style="{StaticResource CornerRadiusStyleGridBorder}" Margin="475,160,0,60" HorizontalAlignment="Left" Width="1399" Grid.ColumnSpan="3" Background="{x:Null}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -150,15 +151,14 @@
                           Grid.Row="1"
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
-                          Height="712" Width="712">
+                          Height="712" Width="712"
+                          LegendLocation="Right">
                 <!-- Series will be added dynamically in code-behind -->
             </lvc:PieChart>
-            
+
             <!-- Add Canvas here for labels and lines -->
             <Canvas x:Name="canvas" Grid.Row="1" Grid.Column="0" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
-        <Label Content="Food Group Distribution in Selected Menu" RenderTransformOrigin="0.692,0.538" FontSize="40" FontFamily="Dubai Light" Padding="0,20,0,0" HorizontalContentAlignment="Center" Margin="475,84,46,0" Foreground="Black" UseLayoutRounding="False" Height="71" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Grid.ColumnSpan="3" FontWeight="Bold"/>
-
-
+        <Label Content="Food Group Breakdown for Selected Menu" RenderTransformOrigin="0.692,0.538" FontSize="40" FontFamily="Dubai Light" Padding="0,20,0,0" HorizontalContentAlignment="Center" Margin="475,84,46,0" Foreground="Black" UseLayoutRounding="False" Height="71" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Grid.ColumnSpan="3" FontWeight="Bold"/>
     </Grid>
 </Window>

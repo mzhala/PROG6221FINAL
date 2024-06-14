@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 
@@ -13,26 +12,38 @@ namespace PROG6221_FINAL
     public partial class FoodGroupPieChart : Window
     {
         private RecipeApp recipeApp;
-        private int totalIngredients; // Declare totalIngredients at class level
+        private int totalIngredients;
+        private List<Recipe> allRecipes;
+        private List<Recipe> selectedRecipes;
 
         public FoodGroupPieChart()
         {
             InitializeComponent();
-            recipeApp = new RecipeApp(); // Instantiate RecipeApp
-            LoadFoodGroupDistribution();
+            recipeApp = new RecipeApp();
+            allRecipes = recipeApp.GetAllRecipes();
+            selectedRecipes = new List<Recipe>();
             DisplaySortedRecipeNames();
         }
 
         private void LoadFoodGroupDistribution()
         {
-            // Get all recipes
-            List<Recipe> recipes = recipeApp.GetAllRecipes();
+            // Initialize the series collection
+            SeriesCollection series = new SeriesCollection();
 
+            // Update pie chart
+            UpdatePieChart(series);
+
+            // Set the series to the pie chart
+            pieChart.Series = series;
+        }
+
+        private void UpdatePieChart(SeriesCollection series)
+        {
             // Calculate food group distribution
             var foodGroupCounts = new Dictionary<string, int>();
-            totalIngredients = 0; // Initialize totalIngredients here
+            totalIngredients = 0;
 
-            foreach (var recipe in recipes)
+            foreach (var recipe in selectedRecipes)
             {
                 foreach (var ingredient in recipe.Ingredients)
                 {
@@ -47,46 +58,24 @@ namespace PROG6221_FINAL
                 }
             }
 
-            // Prepare data for pie chart
-            SeriesCollection series = new SeriesCollection();
             foreach (var kv in foodGroupCounts)
             {
-                double percentage = (double)kv.Value / totalIngredients * 100;
                 series.Add(new PieSeries
                 {
                     Title = kv.Key,
                     Values = new ChartValues<int> { kv.Value },
-
-                    DataLabels = true, // Display data labels
-                    LabelPoint = point => $"{point.Participation:P}", // Customize label to show percentage
-                    FontWeight = FontWeights.Bold, // Bold font for labels
-                    FontSize = 14, // Adjust font size as needed
-
-                    Foreground = Brushes.Black, // Set text color to black
-
+                    DataLabels = true,
+                    LabelPoint = point => $"{point.Participation:P}",
+                    FontWeight = FontWeights.Bold,
+                    FontSize = 14,
+                    Foreground = Brushes.Black
                 });
             }
-
-            // Set the Series of the pie chart
-            pieChart.LegendLocation = LegendLocation.Right;
-
-            pieChart.Series = series;
-
         }
-
-
-
-
 
         private void DisplaySortedRecipeNames()
         {
-            // Get all recipes
-            List<Recipe> recipes = recipeApp.GetAllRecipes();
-
-            // Sort recipes by name
-            var sortedRecipes = recipes.OrderBy(r => r.Name).ToList();
-
-            // Bind sorted recipes to the ListBox
+            var sortedRecipes = allRecipes.OrderBy(r => r.Name).ToList();
             lst_allRecipeList.ItemsSource = sortedRecipes;
             lst_allRecipeList.DisplayMemberPath = "Name";
         }
@@ -130,5 +119,61 @@ namespace PROG6221_FINAL
         {
             // Already on the Food Group Chart page
         }
+
+        private void btn_addRecipeToPieChart_Click(object sender, RoutedEventArgs e)
+        {
+            Recipe selectedRecipe = lst_allRecipeList.SelectedItem as Recipe;
+            if (selectedRecipe != null)
+            {
+                selectedRecipes.Add(selectedRecipe);
+                allRecipes.Remove(selectedRecipe);
+
+                // Refresh the lists
+                lst_allRecipeList.ItemsSource = null;
+                lst_allRecipeList.ItemsSource = allRecipes.OrderBy(r => r.Name).ToList();
+
+                lst_selectedRecipeList.ItemsSource = null;
+                lst_selectedRecipeList.ItemsSource = selectedRecipes.OrderBy(r => r.Name).ToList();
+
+                // Update the pie chart with the new selection
+                LoadFoodGroupDistribution();
+            }
+        }
+
+        private void btn_removeSelectedRecipe_Click(object sender, RoutedEventArgs e)
+        {
+            Recipe selectedRecipe = lst_selectedRecipeList.SelectedItem as Recipe;
+            if (selectedRecipe != null)
+            {
+                allRecipes.Add(selectedRecipe);
+                selectedRecipes.Remove(selectedRecipe);
+
+                // Refresh the lists
+                lst_allRecipeList.ItemsSource = null;
+                lst_allRecipeList.ItemsSource = allRecipes.OrderBy(r => r.Name).ToList();
+
+                lst_selectedRecipeList.ItemsSource = null;
+                lst_selectedRecipeList.ItemsSource = selectedRecipes.OrderBy(r => r.Name).ToList();
+
+                // Update the pie chart with the new selection
+                LoadFoodGroupDistribution();
+            }
+        }
+
+        private void btn_clearRecipeList_Click(object sender, RoutedEventArgs e)
+        {
+            allRecipes.AddRange(selectedRecipes);
+            selectedRecipes.Clear();
+
+            // Refresh the lists
+            lst_allRecipeList.ItemsSource = null;
+            lst_allRecipeList.ItemsSource = allRecipes.OrderBy(r => r.Name).ToList();
+
+            lst_selectedRecipeList.ItemsSource = null;
+
+            // Update the pie chart with the new selection
+            LoadFoodGroupDistribution();
+        }
+
     }
 }
