@@ -45,12 +45,13 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Width="1920" Height="1004" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+    <Grid x:Name="container" Width="1920" Height="1004" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FFF2F2F2"/>
                 <GradientStop Color="#9035985D" Offset="1"/>
-                <GradientStop Color="#A5CBE8D6" Offset="0.55"/>
+                <GradientStop Color="#A5CBE8D6" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -59,20 +60,27 @@
             <ColumnDefinition Width="200*"/>
             <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.ColumnSpan="4" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="image" Source="background.png" Stretch="UniformToFill" Width="1918" Height="1005" RenderTransformOrigin="0.5,0.5" Opacity="0.8"/>
+            </StackPanel>
+        </Grid>
 
-        <Grid HorizontalAlignment="Left" Width="1920" Height="84" VerticalAlignment="Top" Grid.ColumnSpan="4">
+        <Grid x:Name="header" HorizontalAlignment="Left" Width="1920" Height="84" VerticalAlignment="Bottom" Grid.ColumnSpan="4" Background="#A6D1D5" Margin="0,0,0,920">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1019*"/>
                 <ColumnDefinition Width="901*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="DishMe" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Margin="50,0,651,0" Foreground="Green" UseLayoutRounding="False" Height="63" VerticalAlignment="Center"/>
-            <Label Content="." HorizontalAlignment="Left" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Width="17" Height="64" VerticalAlignment="Center" Margin="214,0,0,0"/>
-            <Button x:Name="btn_home" Style="{StaticResource HoverEffectStyleNone}" Content="Home" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="550,42,0,0" Click="btn_home_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Foreground="Green" FontWeight="Bold"/>
+            <Label Content="DishMe" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Margin="50,15,651,0" Foreground="#FF065A63" UseLayoutRounding="False" Height="64" VerticalAlignment="Center"/>
+            <Label Content="." HorizontalAlignment="Left" RenderTransformOrigin="0.692,0.538" FontSize="50" FontFamily="Dubai Medium" Padding="0,0,0,0" HorizontalContentAlignment="Stretch" Width="17" Height="64" VerticalAlignment="Center" Margin="214,15,0,0"/>
+            <Button x:Name="btn_home" Style="{StaticResource HoverEffectStyleNone}" Content="Home" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="550,42,0,0" Click="btn_home_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Foreground="#FF065A63" FontWeight="Bold"/>
             <Button x:Name="btn_view_recipes" Style="{StaticResource HoverEffectStyle}"  Content="View Recipes" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="750,42,0,0" Grid.ColumnSpan="2" Click="btn_view_recipes_Click" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10"/>
             <Button x:Name="btn_add_recipe" Style="{StaticResource HoverEffectStyle}" Content="Add Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="-60,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_add_recipe_Click"/>
             <Button x:Name="btn_update_recipe" Style="{StaticResource HoverEffectStyle}" Content="Update Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="140,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_update_recipe_Click"/>
             <Button x:Name="btn_remove_recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="365,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Height="42" VerticalAlignment="Top" Padding="1,1,1,10" Click="btn_remove_recipe_Click"/>
             <Button x:Name="btn_food_group" Style="{StaticResource HoverEffectStyle}" Content="Food Group Chart" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="602,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Padding="1,1,1,10" Click="btn_food_group_Click"/>
+        </Grid>
+        <Grid>
         </Grid>
         <Label Content="© 2024 Halalisile Mzobe" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="1920" Height="34" HorizontalContentAlignment="Center" Background="{x:Null}" FontSize="16" Margin="0,970,0,0" Padding="5,0,5,0"/>
         <Label Content="Soup Savvy:" HorizontalAlignment="Left" Margin="0,275,0,0" VerticalAlignment="Top" Height="227" Width="1920" Grid.ColumnSpan="4" FontFamily="Microsoft Sans Serif" FontSize="140" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>

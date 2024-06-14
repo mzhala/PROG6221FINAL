@@ -114,12 +114,16 @@ namespace PROG6221_FINAL
 
         private void btn_add_recipe_Click(object sender, RoutedEventArgs e)
         {
-
+            AddRecipe obj = new AddRecipe();
+            this.Visibility = Visibility.Hidden;
+            obj.Show();
         }
 
         private void btn_update_recipe_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateRecipe obj = new UpdateRecipe();
+            this.Visibility = Visibility.Hidden;
+            obj.Show();
         }
 
         private void btn_remove_recipe_Click(object sender, RoutedEventArgs e)
