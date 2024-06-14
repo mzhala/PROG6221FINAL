@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using PROG6221_FINAL;
 // Base class representing an FoodGroup in a FoodGroups
 namespace PROG6221_FINAL
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using PROG6221_FINAL;
 // Recipe class representing a recipe with name, ingredients, and instructions
 namespace PROG6221_FINAL
 {

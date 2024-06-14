@@ -1,5 +1,5 @@
 ﻿using System;
-
+using PROG6221_FINAL;
 // Base class representing an item in a recipe
 namespace PROG6221_FINAL
 {

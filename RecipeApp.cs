@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PROG6221_FINAL;
 
 namespace PROG6221_FINAL
 {
@@ -222,13 +223,22 @@ namespace PROG6221_FINAL
             return recipes.Select(r => r.Name).OrderBy(name => name).ToArray();
         }
 
+        public Recipe GetRecipeByName(string recipeName)
+        {
+            return recipes.FirstOrDefault(r => r.Name.Equals(recipeName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public double getRatio()
+        {
+            return ratio;
+        }
         // Method to calculate the sum of calories from a list of ingredients
         public int CalculateTotalCalories(List<Ingredient> ingredients, CalorieExceededHandler calorieExceededHandler)
         {
             int totalCalories = 0;
             foreach (var ingredient in ingredients)
             {
-                totalCalories += ingredient.CalorieCount;
+                totalCalories += (int)(ingredient.CalorieCount * ratio);
             }
 
             if (totalCalories > 300)
@@ -279,6 +289,10 @@ namespace PROG6221_FINAL
 
         }
 
+        public void SetRecipeScale(double i)
+        {
+            ratio = i;
+        }
         public void RemoveRecipe()
         {
             if (recipes.Count == 0)

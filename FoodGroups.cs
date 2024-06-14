@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using PROG6221_FINAL;
 // Class managing a list of food groups
 namespace PROG6221_FINAL
 {

@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ViewRecipe" Height="1020" Width="1920"
         Left="0" Top="0">
+
     <Window.Resources>
         <!-- Define a style for the border corner radius -->
         <Style x:Key="CornerRadiusStyle" TargetType="Button">
@@ -73,7 +74,6 @@
         <Style x:Key="HoverEffectStyle" TargetType="Button" BasedOn="{StaticResource CornerRadiusStyle}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-
                     <Setter Property="Foreground" Value="#CEBA56"/>
                     <Setter Property="FontWeight" Value="Bold"/>
                 </Trigger>
@@ -111,47 +111,63 @@
             <Button x:Name="btn_food_group" Style="{StaticResource HoverEffectStyle}" Content="Food Group Chart" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" BorderBrush="{x:Null}" Background="{x:Null}" HorizontalContentAlignment="Center" UseLayoutRounding="True" Width="200" Margin="602,42,0,0" Grid.Column="1" VerticalContentAlignment="Bottom" Padding="1,1,1,10" Click="btn_food_group_Click"/>
         </Grid>
         <Label Content="© 2024 Halalisile Mzobe" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="4" Width="1920" Height="34" HorizontalContentAlignment="Center" Background="#FFA6D1D5" FontSize="16" Margin="0,970,0,0" Padding="5,0,5,0"/>
+
+        <!-- Border for recipe list view -->
         <Border Style="{StaticResource CornerRadiusStyleGridBorder}" Margin="50,160,1415,60" HorizontalAlignment="Left" Width="390" Grid.ColumnSpan="4">
             <Grid x:Name="list_view" Margin="0,0,-392,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+
+                <!-- Button to view selected recipe -->
                 <Button x:Name="btn_viewSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="View Recipe" HorizontalAlignment="Left" Margin="14,720,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_viewSelected_Recipe_Click"/>
+
+                <!-- Label for scale -->
                 <Label Content="Scale" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" FontSize="24" Height="43" Margin="10,10,0,0"/>
-                <ListBox x:Name="lst_recipeList" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,67,407,80" FontSize="24" Background="White">
-                    <ListBoxItem Content="Recipe 1"/>
-                    <ListBoxItem Content="Recipe 2"/>
-                    <ListBoxItem Content="Recipe 3"/>
-                    <ListBoxItem Content="Recipe 4"/>
+
+                <!-- ListBox for recipe list -->
+                <ListBox x:Name="lst_recipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,67,407,80" FontSize="24" Background="White">
+                    <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
+
+                <!-- Buttons for recipe scaling -->
                 <Button x:Name="btn_recipeScale_half" Style="{StaticResource HoverEffectStyle}" Content="1/2x" HorizontalAlignment="Left" Margin="157,6,0,0" VerticalAlignment="Top" Width="60" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_half_Click" Background="White" FontSize="24"/>
                 <Button x:Name="btn_recipeScale_double" Style="{StaticResource HoverEffectStyle}" Content="2x" HorizontalAlignment="Left" Margin="237,6,0,0" VerticalAlignment="Top" Width="60" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_double_Click" Background="White" FontSize="24"/>
                 <Button x:Name="btn_recipeScale_triple" Style="{StaticResource HoverEffectStyle}" Content="3x" HorizontalAlignment="Left" Margin="317,6,0,0" VerticalAlignment="Top" Width="61" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_triple_Click" Background="White" FontSize="24"/>
                 <Button x:Name="btn_recipeScale_reset" Style="{StaticResource HoverEffectStyle}" Content="1x" HorizontalAlignment="Left" Margin="77,6,0,0" VerticalAlignment="Top" Width="60" FontFamily="Microsoft Sans Serif" Height="47" Click="btn_recipeScale_reset_Click" Background="#FF065A63" FontSize="24"/>
             </Grid>
         </Border>
+
+        <!-- Border for recipe details -->
         <Border x:Name="recipe_list_border" Style="{StaticResource CornerRadiusStyleGridBorder}" Margin="475,160,0,60" HorizontalAlignment="Left" Width="1399" Grid.ColumnSpan="4">
             <Grid x:Name="recipe_list">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+
+                <!-- Label for ingredients -->
                 <Label Content="Ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" FontWeight="Bold" Margin="11,0,0,0"/>
-                <ListBox x:Name="lst_ingredients" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,44,10,460" FontSize="24" Background="{x:Null}">
-                    <ListBoxItem Content="Ingredient 1"/>
-                    <ListBoxItem Content="Ingredient 2"/>
-                    <ListBoxItem Content="Ingredient 3"/>
-                    <ListBoxItem Content="Ingredient 4"/>
+
+                <!-- ListBox for ingredients -->
+                <ListBox x:Name="lst_ingredients" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,44,10,460" FontSize="24" Background="{x:Null}">
+                    <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
+
+                <!-- Label for steps -->
                 <Label Content="Steps" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" Margin="11,342,0,0" FontWeight="Bold"/>
-                <ListBox x:Name="lst_steps" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,392,10,10"  FontSize="24" Background="{x:Null}">
-                    <ListBoxItem Content="Step 1"/>
-                    <ListBoxItem Content="Step 2"/>
-                    <ListBoxItem Content="Step 3"/>
-                    <ListBoxItem Content="Step 4"/>
+
+                <!-- ListBox for steps -->
+                <ListBox x:Name="lst_steps" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,392,10,10"  FontSize="24" Background="{x:Null}">
+                    <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
             </Grid>
         </Border>
-        <Label Content="No Selected Recipe" RenderTransformOrigin="0.692,0.538" FontSize="40" FontFamily="Dubai Medium" Padding="0,20,0,0" HorizontalContentAlignment="Center" Margin="475,84,46,0" Foreground="Black" UseLayoutRounding="False" Height="71" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Grid.ColumnSpan="4"/>
-        <Label Content="Calories" RenderTransformOrigin="0.692,0.538" FontSize="24" FontFamily="Dubai Light" Padding="0,20,0,0" HorizontalContentAlignment="Center" Margin="127,89,46,0" Foreground="#FF3A3636" UseLayoutRounding="False" Height="66" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Grid.Column="3" FontWeight="Bold"/>
+
+        <!-- Label for selected recipe -->
+        <Label x:Name="lbl_selectedRecipe" Content="No Selected Recipe" RenderTransformOrigin="0.692,0.538" FontSize="40" FontFamily="Dubai Medium" Padding="0,20,0,0" HorizontalContentAlignment="Center" Margin="475,84,46,0" Foreground="Black" UseLayoutRounding="False" Height="71" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Grid.ColumnSpan="4"/>
+
+        <!-- Label for calories -->
+        <Label x:Name="lbl_calories" Content="Calories" RenderTransformOrigin="0.692,0.538" FontSize="24" FontFamily="Dubai Light" Padding="0,20,0,0" Margin="0,89,46,0" Foreground="#FF3A3636" UseLayoutRounding="False" Height="66" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Grid.Column="3" FontWeight="Bold" HorizontalAlignment="Right" Width="154" FlowDirection="RightToLeft"/>
     </Grid>
+
 </Window>
