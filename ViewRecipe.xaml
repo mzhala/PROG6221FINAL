@@ -126,7 +126,7 @@
                 <Label Content="Scale" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" FontSize="24" Height="43" Margin="10,10,0,0"/>
 
                 <!-- ListBox for recipe list -->
-                <ListBox x:Name="lst_recipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,67,407,80" FontSize="24" Background="White">
+                <ListBox x:Name="lst_recipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,120,407,80" FontSize="24" Background="White">
                     <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
 
@@ -187,6 +187,7 @@
 
         <!-- Label for calories -->
         <Label x:Name="lbl_calories" Content="Calories" RenderTransformOrigin="0.692,0.538" FontSize="24" FontFamily="Dubai Light" Padding="0,20,0,0" Margin="0,89,46,0" Foreground="#FF3A3636" UseLayoutRounding="False" Height="66" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Grid.Column="3" FontWeight="Bold" HorizontalAlignment="Right" Width="154" FlowDirection="RightToLeft"/>
+        <Label Content="Recipes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="366" FontSize="24" Height="44" Margin="57,218,0,0" FontWeight="Bold"/>
     </Grid>
 
 </Window>
