@@ -148,16 +148,35 @@
                 <!-- Label for ingredients -->
                 <Label Content="Ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" FontWeight="Bold" Margin="11,0,0,0"/>
 
-                <!-- ListBox for ingredients -->
-                <ListBox x:Name="lst_ingredients" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,44,10,460" FontSize="24" Background="{x:Null}">
-                    <!-- Sample Items - these will be populated dynamically -->
-                </ListBox>
+                <!-- Data Grid for ingredients -->
+                <DataGrid x:Name="dataGrid_ingredients" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="288" Width="1360" Margin="10,49,0,0" 
+                  GridLinesVisibility="None" 
+                  HeadersVisibility="Column"
+                  ColumnWidth="*"
+                  Background="white" 
+                  FontSize="24">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="No." Binding="{Binding Number}" Width="50"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                        <DataGridTextColumn Header="Unit" Binding="{Binding Unit}" Width="*"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTextColumn Header="Calories" Binding="{Binding CalorieCount}" Width="*"/>
+                        <DataGridTextColumn Header="Food Group" Binding="{Binding FoodGroup}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
                 <!-- Label for steps -->
                 <Label Content="Steps" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" Margin="11,342,0,0" FontWeight="Bold"/>
 
                 <!-- ListBox for steps -->
-                <ListBox x:Name="lst_steps" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,392,10,10"  FontSize="24" Background="{x:Null}">
+                <ListBox x:Name="lst_steps" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,392,10,10"  FontSize="24" Background="white">
                     <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
             </Grid>

@@ -42,30 +42,36 @@ namespace PROG6221_FINAL
             {
                 // Calculate scaled ingredients
                 var scaledIngredients = selectedRecipe.Ingredients
-                    .Select(ing => new Ingredient(
+                    .Select((ing, index) => new
+                    {
+                        Number = index + 1,
                         ing.Name,
-                        ing.Quantity * recipeApp.getRatio(),
+                        Quantity = ing.Quantity * recipeApp.getRatio(),
                         ing.Unit,
                         ing.CalorieCount,
-                        ing.FoodGroupIndex))
+                        FoodGroup = recipeApp.getFoodGroup(ing.FoodGroupIndex)
+                    })
                     .ToList();
 
-                // Display scaled ingredients with numbering, calorie count, and food group
-                lst_ingredients.ItemsSource = scaledIngredients
-                    .Select((ing, index) => $"{index + 1}. {ing.Quantity} {ing.Unit} {ing.Name} (Calories: {ing.CalorieCount}, Food Group: {recipeApp.getFoodGroup(ing.FoodGroupIndex)})");
+                // Display scaled ingredients in DataGrid
+                dataGrid_ingredients.ItemsSource = scaledIngredients;
 
                 // Display steps with numbering
                 lst_steps.ItemsSource = selectedRecipe.Steps
                     .Select((step, index) => $"{index + 1}. {step.Instruction}");
 
                 // Calculate total calories with scaled ingredients
-                double totalCalories = recipeApp.CalculateTotalCalories(scaledIngredients, recipeApp.HandleCalorieExceeded);
+                double totalCalories = recipeApp.CalculateTotalCalories(
+                    scaledIngredients.Select(ing => new Ingredient(ing.Name, ing.Quantity, ing.Unit, ing.CalorieCount, selectedRecipe.Ingredients.First(i => i.Name == ing.Name).FoodGroupIndex)).ToList(),
+                    recipeApp.HandleCalorieExceeded
+                );
 
                 // Display recipe details
                 lbl_selectedRecipe.Content = selectedRecipe.Name;
                 lbl_calories.Content = $"Calories: {totalCalories}";
             }
         }
+
 
         private void btn_viewSelected_Recipe_Click(object sender, RoutedEventArgs e)
         {
