@@ -52,7 +52,7 @@
                              Background="{TemplateBinding Background}" 
                              BorderBrush="{TemplateBinding BorderBrush}" 
                              BorderThickness="{TemplateBinding BorderThickness}" 
-                             CornerRadius="5">
+                             CornerRadius="1">
                             <ScrollViewer Margin="0" Focusable="False">
                                 <ItemsPresenter/>
                             </ScrollViewer>
@@ -149,7 +149,7 @@
                 <Label Content="Ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" FontWeight="Bold" Margin="11,0,0,0"/>
 
                 <!-- Data Grid for ingredients -->
-                <DataGrid x:Name="dataGrid_ingredients" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="288" Width="1360" Margin="10,49,0,0" 
+                <DataGrid x:Name="dataGrid_ingredients" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="298" Width="1380" Margin="6,45,17,10" 
                   GridLinesVisibility="None" 
                   HeadersVisibility="Column"
                   ColumnWidth="*"
@@ -176,7 +176,7 @@
                 <Label Content="Steps" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" Margin="11,342,0,0" FontWeight="Bold"/>
 
                 <!-- ListBox for steps -->
-                <ListBox x:Name="lst_steps" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,392,10,10"  FontSize="24" Background="white">
+                <ListBox x:Name="lst_steps" Style="{StaticResource CornerRadiusStyleListBox}" Margin="6,392,17,10"  FontSize="24" Background="white" Width="1380">
                     <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
             </Grid>

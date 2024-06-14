@@ -69,8 +69,19 @@ namespace PROG6221_FINAL
                 // Display recipe details
                 lbl_selectedRecipe.Content = selectedRecipe.Name;
                 lbl_calories.Content = $"Calories: {totalCalories}";
+
+            }
+            else
+            {
+
+                // Clear UI elements related to recipe details
+                dataGrid_ingredients.ItemsSource = null;
+                lst_steps.ItemsSource = null;
+                lbl_selectedRecipe.Content = "No Selected Recipe";
+                lbl_calories.Content = "Calories";
             }
         }
+
 
 
         private void btn_viewSelected_Recipe_Click(object sender, RoutedEventArgs e)
@@ -81,7 +92,10 @@ namespace PROG6221_FINAL
                 DisplayRecipeDetails(selectedRecipeName);
             }
 
+            // Change button background color temporarily
             btn_viewSelected_Recipe.Background = Brushes.Green;
+
+            // Reset button background after a delay
             Delayed1SecMethod().ContinueWith(_ =>
             {
                 Dispatcher.Invoke(() =>
@@ -89,6 +103,15 @@ namespace PROG6221_FINAL
                     btn_viewSelected_Recipe.Background = Brushes.White;
                 });
             });
+        }
+
+
+        private void ClearRecipeDetails()
+        {
+            lbl_selectedRecipe.Content = "No Selected Recipe";
+            lbl_calories.Content = "Calories: ";
+            dataGrid_ingredients.ItemsSource = null;
+            lst_steps.ItemsSource = null;
         }
 
         private static async Task Delayed1SecMethod()
@@ -138,7 +161,48 @@ namespace PROG6221_FINAL
 
         private void btn_removeSelected_Recipe_Confirm_Click(object sender, RoutedEventArgs e)
         {
+            if (lst_recipeList.SelectedItem != null)
+            {
+                string selectedRecipeName = lst_recipeList.SelectedItem.ToString();
+                Recipe selectedRecipe = recipeApp.GetRecipeByName(selectedRecipeName);
 
+                if (selectedRecipe != null)
+                {
+                    // Remove the recipe from the app
+                    recipeApp.RemoveRecipe(selectedRecipe);
+
+                    // Refresh recipe list
+                    LoadRecipes();
+
+                    // Clear details
+                    ClearRecipeDetails();
+                }
+            }
+
+            // Hide confirm button
+            btn_removeSelected_Recipe_Confirm.Visibility = Visibility.Hidden;
+            lb_Confirm.Visibility = Visibility.Hidden;
         }
+
+        private void btn_removeSelected_Recipe_Click(object sender, RoutedEventArgs e)
+        {
+            if (lst_recipeList.SelectedItem != null)
+            {
+                // Show confirm button and label
+                btn_removeSelected_Recipe_Confirm.Visibility = Visibility.Visible;
+                lb_Confirm.Visibility = Visibility.Visible;
+
+                // Hide no recipe selected label
+                lb_NoRecipeSelected.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                // Show NoRecipeSelected label
+                btn_removeSelected_Recipe_Confirm.Visibility = Visibility.Hidden;
+                lb_Confirm.Visibility = Visibility.Hidden;
+                lb_NoRecipeSelected.Visibility = Visibility.Visible;
+            }
+        }
+
     }
 }

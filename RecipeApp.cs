@@ -237,6 +237,9 @@ namespace PROG6221_FINAL
         {
             return foodGroups.GetFoodGroupName(index);
         }
+
+        
+
         // Method to calculate the sum of calories from a list of ingredients
         public int CalculateTotalCalories(List<Ingredient> ingredients, CalorieExceededHandler calorieExceededHandler)
         {
@@ -336,6 +339,16 @@ namespace PROG6221_FINAL
             else
             {
                 Console.WriteLine("Removal cancelled.");
+            }
+        }
+
+        // Method to remove a recipe
+        public void RemoveRecipe(Recipe recipe)
+        {
+            // Ensure recipe exists in the collection
+            if (recipes.Contains(recipe))
+            {
+                recipes.Remove(recipe);
             }
         }
     }

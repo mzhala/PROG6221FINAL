@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG6221_FINAL"
         mc:Ignorable="d"
-        Title="ViewRecipe" Height="1020" Width="1920"
+        Title="RemoveRecipe" Height="1020" Width="1920"
         Left="0" Top="0">
 
     <Window.Resources>
@@ -52,7 +52,7 @@
                              Background="{TemplateBinding Background}" 
                              BorderBrush="{TemplateBinding BorderBrush}" 
                              BorderThickness="{TemplateBinding BorderThickness}" 
-                             CornerRadius="5">
+                             CornerRadius="1">
                             <ScrollViewer Margin="0" Focusable="False">
                                 <ItemsPresenter/>
                             </ScrollViewer>
@@ -114,26 +114,27 @@
 
         <!-- Border for recipe list view -->
         <Border Style="{StaticResource CornerRadiusStyleGridBorder}" Margin="50,160,1415,60" HorizontalAlignment="Left" Width="390" Grid.ColumnSpan="4">
-            
             <Grid x:Name="list_view" Margin="0,0,-392,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Recipes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="366" FontSize="24" Height="43" Margin="10,0,0,0" FontWeight="Bold"/>
 
-                <!-- Button to view selected recipe -->
-                <Button x:Name="btn_removeSelected_Recipe_Confirm" Style="{StaticResource HoverEffectStyle}" Content="Confirm" HorizontalAlignment="Left" Margin="14,720,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_removeSelected_Recipe_Confirm_Click"/>
-
-                <!-- Label for scale -->
-
                 <!-- ListBox for recipe list -->
                 <ListBox x:Name="lst_recipeList" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,43,407,205" FontSize="24" Background="White">
                     <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
-                <Button x:Name="btn_removeSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" Margin="14,661,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24"/>
+
+                <!-- Button to view selected recipe -->
                 <Button x:Name="btn_viewSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="View Recipe" HorizontalAlignment="Left" Margin="14,597,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_viewSelected_Recipe_Click"/>
 
-                <!-- Buttons for recipe scaling -->
+                <!-- Button to remove selected recipe -->
+                <Button x:Name="btn_removeSelected_Recipe" Style="{StaticResource HoverEffectStyle}" Content="Remove Recipe" HorizontalAlignment="Left" Margin="14,660,0,0" VerticalAlignment="Top" Width="364" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_removeSelected_Recipe_Click"/>
+
+                <!-- Confirm button to actually remove recipe, initially hidden -->
+                <Button x:Name="btn_removeSelected_Recipe_Confirm" Style="{StaticResource HoverEffectStyle}" Content="Yes" HorizontalAlignment="Left" Margin="278,720,0,0" VerticalAlignment="Top" Width="100" FontFamily="Microsoft Sans Serif" Height="50" Background="White" FontSize="24" Click="btn_removeSelected_Recipe_Confirm_Click" Visibility="Hidden"/>
+                <Label x:Name="lb_Confirm" Content="Are You Sure?" HorizontalAlignment="Left" Margin="14,720,0,0" VerticalAlignment="Top" Width="259" Height="50" FontSize="24" Visibility="Hidden"/>
+                <Label x:Name="lb_NoRecipeSelected" Content="No Recipe Selected!" HorizontalAlignment="Left" Margin="14,720,0,0" VerticalAlignment="Top" Width="259" Height="50" FontSize="24" Visibility="Hidden"/>
             </Grid>
         </Border>
 
@@ -148,7 +149,7 @@
                 <Label Content="Ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" FontWeight="Bold" Margin="11,0,0,0"/>
 
                 <!-- Data Grid for ingredients -->
-                <DataGrid x:Name="dataGrid_ingredients" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="288" Width="1360" Margin="10,49,0,0" 
+                <DataGrid x:Name="dataGrid_ingredients" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="288" Width="1380" Margin="6,45,17,10" 
                   GridLinesVisibility="None" 
                   HeadersVisibility="Column"
                   ColumnWidth="*"
@@ -175,7 +176,7 @@
                 <Label Content="Steps" HorizontalAlignment="Left" VerticalAlignment="Top" Width="288" FontSize="24" Height="44" Margin="11,342,0,0" FontWeight="Bold"/>
 
                 <!-- ListBox for steps -->
-                <ListBox x:Name="lst_steps" Style="{StaticResource CornerRadiusStyleListBox}" Margin="14,392,10,10"  FontSize="24" Background="white">
+                <ListBox x:Name="lst_steps" Style="{StaticResource CornerRadiusStyleListBox}" Margin="6,392,17,10"  FontSize="24" Background="white" Width="1380">
                     <!-- Sample Items - these will be populated dynamically -->
                 </ListBox>
             </Grid>
