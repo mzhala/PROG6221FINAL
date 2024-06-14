@@ -150,6 +150,10 @@ namespace PROG6221_FINAL
             Console.WriteLine("Recipe added successfully!");
         }
 
+        public void AddRecipe(Recipe newRecipe)
+        {
+            recipes.Add(newRecipe);
+        }
         public void ViewRecipes()
         {
             if (recipes.Count == 0)
