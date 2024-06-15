@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Wpf;
@@ -15,13 +17,20 @@ namespace PROG6221_FINAL
         private int totalIngredients;
         private List<Recipe> allRecipes;
         private List<Recipe> selectedRecipes;
+        private ICollectionView allRecipesView;
 
-        public FoodGroupPieChart()
+        public FoodGroupPieChart(RecipeApp existingRecipeApp)
         {
             InitializeComponent();
-            recipeApp = new RecipeApp();
+
+            recipeApp = existingRecipeApp; // Use the passed-in RecipeApp instance
             allRecipes = recipeApp.GetAllRecipes();
             selectedRecipes = new List<Recipe>();
+
+            // Create a CollectionView for allRecipes and set the filter
+            allRecipesView = CollectionViewSource.GetDefaultView(allRecipes);
+            allRecipesView.Filter = FilterRecipes;
+
             DisplaySortedRecipeNames();
         }
 
@@ -75,42 +84,34 @@ namespace PROG6221_FINAL
 
         private void DisplaySortedRecipeNames()
         {
-            var sortedRecipes = allRecipes.OrderBy(r => r.Name).ToList();
-            lst_allRecipeList.ItemsSource = sortedRecipes;
+            lst_allRecipeList.ItemsSource = allRecipesView;
             lst_allRecipeList.DisplayMemberPath = "Name";
         }
 
         private void btn_home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow obj = new MainWindow();
+            Home obj = new Home(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
         {
-            ViewRecipe obj = new ViewRecipe();
+            ViewRecipe obj = new ViewRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_add_recipe_Click(object sender, RoutedEventArgs e)
         {
-            AddRecipe obj = new AddRecipe();
-            this.Visibility = Visibility.Hidden;
-            obj.Show();
-        }
-
-        private void btn_update_recipe_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateRecipe obj = new UpdateRecipe();
+            AddRecipe obj = new AddRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_remove_recipe_Click(object sender, RoutedEventArgs e)
         {
-            RemoveRecipe obj = new RemoveRecipe();
+            RemoveRecipe obj = new RemoveRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
@@ -123,20 +124,14 @@ namespace PROG6221_FINAL
         private void btn_addRecipeToPieChart_Click(object sender, RoutedEventArgs e)
         {
             Recipe selectedRecipe = lst_allRecipeList.SelectedItem as Recipe;
-            if (selectedRecipe != null)
+            if (selectedRecipe != null && !selectedRecipes.Contains(selectedRecipe))
             {
                 selectedRecipes.Add(selectedRecipe);
-                allRecipes.Remove(selectedRecipe);
+                // Refresh the CollectionView to update the display
+                allRecipesView.Refresh();
 
-                // Refresh the lists
-                lst_allRecipeList.ItemsSource = null;
-                lst_allRecipeList.ItemsSource = allRecipes.OrderBy(r => r.Name).ToList();
-
-                lst_selectedRecipeList.ItemsSource = null;
-                lst_selectedRecipeList.ItemsSource = selectedRecipes.OrderBy(r => r.Name).ToList();
-
-                // Update the pie chart with the new selection
-                LoadFoodGroupDistribution();
+                // Refresh the selected recipe list
+                UpdateRecipeLists();
             }
         }
 
@@ -145,35 +140,36 @@ namespace PROG6221_FINAL
             Recipe selectedRecipe = lst_selectedRecipeList.SelectedItem as Recipe;
             if (selectedRecipe != null)
             {
-                allRecipes.Add(selectedRecipe);
                 selectedRecipes.Remove(selectedRecipe);
+                // Refresh the CollectionView to update the display
+                allRecipesView.Refresh();
 
-                // Refresh the lists
-                lst_allRecipeList.ItemsSource = null;
-                lst_allRecipeList.ItemsSource = allRecipes.OrderBy(r => r.Name).ToList();
-
-                lst_selectedRecipeList.ItemsSource = null;
-                lst_selectedRecipeList.ItemsSource = selectedRecipes.OrderBy(r => r.Name).ToList();
-
-                // Update the pie chart with the new selection
-                LoadFoodGroupDistribution();
+                // Refresh the selected recipe list
+                UpdateRecipeLists();
             }
         }
 
         private void btn_clearRecipeList_Click(object sender, RoutedEventArgs e)
         {
-            allRecipes.AddRange(selectedRecipes);
             selectedRecipes.Clear();
+            // Refresh the CollectionView to update the display
+            allRecipesView.Refresh();
 
-            // Refresh the lists
-            lst_allRecipeList.ItemsSource = null;
-            lst_allRecipeList.ItemsSource = allRecipes.OrderBy(r => r.Name).ToList();
+            // Refresh the selected recipe list
+            UpdateRecipeLists();
+        }
 
-            lst_selectedRecipeList.ItemsSource = null;
-
+        private void UpdateRecipeLists()
+        {
+            lst_selectedRecipeList.ItemsSource = selectedRecipes.OrderBy(r => r.Name).ToList();
             // Update the pie chart with the new selection
             LoadFoodGroupDistribution();
         }
 
+        private bool FilterRecipes(object item)
+        {
+            Recipe recipe = item as Recipe;
+            return recipe != null && !selectedRecipes.Contains(recipe);
+        }
     }
 }

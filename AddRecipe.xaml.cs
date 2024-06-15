@@ -13,10 +13,11 @@ namespace PROG6221_FINAL
         private List<Ingredient> ingredients = new List<Ingredient>();
         private List<Step> steps = new List<Step>();
 
-        public AddRecipe()
+        public AddRecipe(RecipeApp existingRecipeApp)
         {
             InitializeComponent();
-            recipeApp = new RecipeApp(); // Instantiate RecipeApp
+
+            recipeApp = existingRecipeApp; // Use the passed-in RecipeApp instance
             LoadRecipes(); // Call LoadRecipes method to load data into UI
             LoadFoodGroups();
         }
@@ -41,14 +42,14 @@ namespace PROG6221_FINAL
 
         private void btn_home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow obj = new MainWindow();
+            Home obj = new Home(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
         {
-            ViewRecipe obj = new ViewRecipe();
+            ViewRecipe obj = new ViewRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
@@ -101,11 +102,9 @@ namespace PROG6221_FINAL
             error_msg.Content = "";
 
             // Create Ingredient object
-            Ingredient newIngredient = new Ingredient(ingredientName, quantity, unit, calorieCount, foodGroupIndex);
-
+            Ingredient newIngredient = new Ingredient(ingredientName, quantity, unit, calorieCount, foodGroupIndex+1);
             // Add Ingredient to list
             ingredients.Add(newIngredient);
-
             // Add Ingredient details to ListBox
             lst_ingredients.Items.Add(newIngredient.Name);
 
@@ -156,23 +155,16 @@ namespace PROG6221_FINAL
             error_msg.Content = "";
         }
 
-        private void btn_update_recipe_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateRecipe obj = new UpdateRecipe();
-            this.Visibility = Visibility.Hidden;
-            obj.Show();
-        }
-
         private void btn_remove_recipe_Click(object sender, RoutedEventArgs e)
         {
-            RemoveRecipe obj = new RemoveRecipe();
+            RemoveRecipe obj = new RemoveRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_food_group_Click(object sender, RoutedEventArgs e)
         {
-            FoodGroupPieChart obj = new FoodGroupPieChart();
+            FoodGroupPieChart obj = new FoodGroupPieChart(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
@@ -189,20 +181,29 @@ namespace PROG6221_FINAL
             // Read recipe name from text box
             string recipeName = txtBx_recipeName.Text.Trim();
 
+            // Log the ingredients for debugging
+            foreach (var ing in ingredients)
+            {
+                Console.WriteLine($"Ingredient: {ing.Name}, Quantity: {ing.Quantity}, Unit: {ing.Unit}, Calories: {ing.CalorieCount}");
+            }
+
             // Create Recipe object
-            Recipe newRecipe = new Recipe(recipeName, ingredients, steps);
+            Recipe newRecipe = new Recipe(recipeName, new List<Ingredient>(ingredients), new List<Step>(steps));
 
             // Add Recipe to RecipeApp
             recipeApp.AddRecipe(newRecipe);
+
+            // Log the recipe for debugging
+            Console.WriteLine($"Recipe added: {newRecipe.Name}, Ingredients count: {newRecipe.Ingredients.Count}, Steps count: {newRecipe.Steps.Count}");
 
             // Clear UI fields after adding recipe
             ClearRecipeFields();
 
             // Optionally, provide feedback or navigate to another window
-            error_msg.Content =  "Recipe added successfully!";
+            error_msg.Content = "Recipe added successfully!";
             LoadRecipes();
-
         }
+
 
         private void ClearRecipeFields()
         {

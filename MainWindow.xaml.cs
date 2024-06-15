@@ -16,9 +16,11 @@ namespace PROG6221_FINAL
     /// </summary>
     public partial class MainWindow : Window
     {
+        private RecipeApp recipeApp;
         public MainWindow()
         {
             InitializeComponent();
+            recipeApp = new RecipeApp();
         }
 
         private void btn_home_Click(object sender, RoutedEventArgs e)
@@ -28,35 +30,28 @@ namespace PROG6221_FINAL
 
         private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
         {
-            ViewRecipe obj = new ViewRecipe();
+            ViewRecipe obj = new ViewRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_add_recipe_Click(object sender, RoutedEventArgs e)
         {
-            AddRecipe obj = new AddRecipe();
-            this.Visibility = Visibility.Hidden;
-            obj.Show();
-        }
-
-        private void btn_update_recipe_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateRecipe obj = new UpdateRecipe();
+            AddRecipe obj = new AddRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_remove_recipe_Click(object sender, RoutedEventArgs e)
         {
-            RemoveRecipe obj = new RemoveRecipe();
+            RemoveRecipe obj = new RemoveRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_food_group_Click(object sender, RoutedEventArgs e)
         {
-            FoodGroupPieChart obj = new FoodGroupPieChart();
+            FoodGroupPieChart obj = new FoodGroupPieChart(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }

@@ -11,11 +11,11 @@ namespace PROG6221_FINAL
     {
         private RecipeApp recipeApp; // Ensure this field is declared at the class level
 
-        public RemoveRecipe()
+        public RemoveRecipe(RecipeApp existingRecipeApp)
         {
             InitializeComponent();
 
-            recipeApp = new RecipeApp(); // Instantiate RecipeApp
+            recipeApp = existingRecipeApp; // Use the passed-in RecipeApp instance
 
             LoadRecipes(); // Call LoadRecipes method to load data into UI
         }
@@ -121,42 +121,33 @@ namespace PROG6221_FINAL
 
         private void btn_home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow obj = new MainWindow();
+            Home obj = new Home(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_add_recipe_Click(object sender, RoutedEventArgs e)
         {
-            AddRecipe obj = new AddRecipe();
-            this.Visibility = Visibility.Hidden;
-            obj.Show();
-        }
-
-        private void btn_update_recipe_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateRecipe obj = new UpdateRecipe();
+            AddRecipe obj = new AddRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_remove_recipe_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow obj = new MainWindow();
-            this.Visibility = Visibility.Hidden;
-            obj.Show();
+            //
         }
 
         private void btn_food_group_Click(object sender, RoutedEventArgs e)
         {
-            FoodGroupPieChart obj = new FoodGroupPieChart();
+            FoodGroupPieChart obj = new FoodGroupPieChart(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
 
         private void btn_view_recipes_Click(object sender, RoutedEventArgs e)
         {
-            ViewRecipe obj = new ViewRecipe();
+            ViewRecipe obj = new ViewRecipe(recipeApp);
             this.Visibility = Visibility.Hidden;
             obj.Show();
         }
